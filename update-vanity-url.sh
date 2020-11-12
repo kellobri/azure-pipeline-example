@@ -44,11 +44,6 @@ if [ $# -eq 0 ] ; then
     exit 1
 fi
 
-DATA='{
-  "path": "'${VANITY_NAME}'"
-  "force": "true"
-}'
-
 # Build the JSON to create a vanity force update request
 DATA=$(jq --arg path "${VANITY_NAME}" \
    --arg force  "true" \
