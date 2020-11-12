@@ -120,3 +120,17 @@ if [ "${CODE}" -ne 0 ]; then
     exit 1
 fi
 echo "Task: ${TASK} Complete."
+
+# Build the JSON to create a vanity force update request
+DATA=$(jq --arg path "${VANITY_NAME}" \
+   --arg force  "true" \
+   '. | .["path"]=$path | .["force"]=$force' \
+   <<<'{}')
+
+RESULT=$(curl --silent --show-error -L --max-redirs 0 --fail -X PUT \
+    -H "Authorization: Key ${CONNECT_API_KEY}" \
+    --data-binary "${DATA}" \
+    "${CONNECT_SERVER}__api__/v1/content/${CONTENT}/vanity")
+RESPONSE=$(echo "$RESULT" | jq -r .path)
+
+echo "Vanity URL: ${RESPONSE} Update Complete."
