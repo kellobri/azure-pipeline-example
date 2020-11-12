@@ -56,7 +56,7 @@ tar czf "${BUNDLE_PATH}" -C "${CONTENT_DIRECTORY}" .
 # better presentation. We build a random name to avoid colliding with existing
 # content.
 NOW=$(date "+%Y-%m-%d %H:%M:%S")
-BASE_TITLE="@"
+BASE_TITLE="$@"
 TITLE="${BASE_TITLE} - ${NOW}"
 
 # Assign a random name. Avoid collisions so we always create something.
