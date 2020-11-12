@@ -101,8 +101,8 @@ CODE=-1
 FIRST=0
 echo "Deployment task: ${TASK}"
 while [ "${FINISHED}" != "true" ] ; do
-    DATA=$(curl -b cookie.txt -c cookie.txt \
-              --silent --show-error -L --max-redirs 0 --fail \
+    DATA=$(curl --silent --show-error -L --max-redirs 0 --fail \
+              -b cookie.txt -c cookie.txt \
               -H "Authorization: Key ${CONNECT_API_KEY}" \
               "${CONNECT_SERVER}__api__/v1/tasks/${TASK}?wait=1&first=${FIRST}")
     # Extract parts of the task status.
