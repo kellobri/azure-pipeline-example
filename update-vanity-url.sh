@@ -33,7 +33,7 @@ if [ -z "${CONNECT_API_KEY}" ] ; then
 fi
 
 if [ -z "${CONTENT}" ] ; then
-    echo "The CONTENT (GUID) environment variable is not defined.
+    echo "The CONTENT (GUID) environment variable is not defined."
     echo
     echo "    export CONTENT='9f790f22-62b3-49d9-b957-3ae86d3eb823'"
     exit 1
@@ -54,6 +54,6 @@ RESULT=$(curl --silent --show-error -L --max-redirs 0 --fail -X PUT \
     -H "Authorization: Key ${CONNECT_API_KEY}" \
     --data-binary "${DATA}" \
     "${CONNECT_SERVER}__api__/v1/content/${CONTENT}/vanity")
-RESPONSE=(echo "$RESULT" | jq -r .path)
+RESPONSE=$(echo "$RESULT" | jq -r .path)
 
-echo "Vanity URL Update Complete."
+echo "Vanity URL: ${RESPONSE} Update Complete."
