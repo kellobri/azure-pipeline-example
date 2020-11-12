@@ -14,9 +14,8 @@ variables:
   value: app-directory
 
 steps:
-- script: date "+%Y-%m-%d %H:%M:%S"
-  name: now
-
+- bash: |
+    echo "##vso[task.setvariable variable=now]crushed tomatoes"
 - task: Bash@3
   inputs:
     filePath: 'create-upload-deploy.sh'
