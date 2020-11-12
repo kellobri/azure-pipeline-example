@@ -103,7 +103,7 @@ echo "Deployment task: ${TASK}"
 while [ "${FINISHED}" != "true" ] ; do
     DATA=$(curl --silent --show-error -L --max-redirs 0 --fail \
               -H "Authorization: Key ${CONNECT_API_KEY}" \
-              "${CONNECT_SERVER}__api__/v1/experimental/tasks/${TASK}?wait=1&first=${FIRST}")
+              "${CONNECT_SERVER}__api__/v1/tasks/${TASK}?wait=3&first=${FIRST}")
     # Extract parts of the task status.
     FINISHED=$(echo "${DATA}" | jq .finished)
     CODE=$(echo "${DATA}" | jq .code)
