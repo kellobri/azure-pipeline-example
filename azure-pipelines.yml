@@ -12,14 +12,12 @@ pool:
 variables:
 - name: CONTENT_DIRECTORY
   value: app-directory
-- name: NOW
-  value: $(Get-Date -Format yyyyMMddhhmmss)
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- script: date "+%Y-%m-%d %H:%M:%S"
+  name: now
 
 - task: Bash@3
   inputs:
     filePath: 'create-upload-deploy.sh'
-    arguments: 'Content Title - ${NOW}'
+    arguments: 'Content Title - $(now)'
