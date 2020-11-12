@@ -91,7 +91,7 @@ DATA=$(jq --arg bundle_id "${BUNDLE}" \
    '. | .["bundle_id"]=$bundle_id' \
    <<<'{}')
 DEPLOY=$(curl --silent --show-error -L --max-redirs 0 --fail -X POST \
-              -b cookie.txt -c cookie.txt \
+              -b cookie.txt \
               -H "Authorization: Key ${CONNECT_API_KEY}" \
               --data "${DATA}" \
               "${CONNECT_SERVER}__api__/v1/content/${CONTENT}/deploy")
@@ -104,7 +104,7 @@ FIRST=0
 echo "Deployment task: ${TASK}"
 while [ "${FINISHED}" != "true" ] ; do
     DATA=$(curl --silent --show-error -L --max-redirs 0 --fail \
-              -b cookie.txt -c cookie.txt \
+              -c cookie.txt \
               -H "Authorization: Key ${CONNECT_API_KEY}" \
               "${CONNECT_SERVER}__api__/v1/tasks/${TASK}?wait=1&first=${FIRST}")
     # Extract parts of the task status.
