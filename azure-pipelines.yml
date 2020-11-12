@@ -13,7 +13,7 @@ variables:
 - name: CONTENT_DIRECTORY
   value: app-directory
 - name: NOW
-  value: ${{date "+%Y-%m-%d %H:%M:%S"}}
+  value: $(Get-Date -Format yyyyMMddhhmmss)
 
 steps:
 - script: echo Hello, world!
