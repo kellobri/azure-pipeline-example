@@ -15,7 +15,7 @@ variables:
 
 steps:
 - bash: |
-    echo "##vso[task.setvariable variable=now]$[Get-Date -Format yyyyMMddhhmmss]"
+    echo "##vso[task.setvariable variable=now]$[date '+%Y-%m-%d %H:%M:%S']"
 - task: Bash@3
   inputs:
     filePath: 'create-upload-deploy.sh'
