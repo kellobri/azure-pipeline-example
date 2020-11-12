@@ -123,7 +123,8 @@ echo "Task: ${TASK} Complete."
 
 # Build the JSON to create a vanity force update request
 DATA=$(jq --arg path "${VANITY_NAME}" \
-   '. | .["path"]=$path' \
+   --arg force  "true" \
+   '. | .["path"]=$path | .["force"]=$force' \
    <<<'{}')
    
 echo "Trying: ${CONNECT_SERVER}__api__/v1/content/${CONTENT}/vanity"
