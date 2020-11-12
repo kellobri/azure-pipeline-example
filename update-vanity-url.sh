@@ -32,6 +32,8 @@ if [ -z "${CONNECT_API_KEY}" ] ; then
     exit 1
 fi
 
+CONTENT="$@"
+
 if [ -z "${CONTENT}" ] ; then
     echo "The CONTENT (GUID) environment variable is not defined."
     echo
