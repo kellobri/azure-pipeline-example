@@ -14,9 +14,7 @@ variables:
   value: app-directory
 
 steps:
-- bash: |
-    echo "##vso[task.setvariable variable=now]$[date '+%Y-%m-%d %H:%M:%S']"
 - task: Bash@3
   inputs:
     filePath: 'create-upload-deploy.sh'
-    arguments: 'Content Title - $(now)'
+    arguments: 'Content Title'
