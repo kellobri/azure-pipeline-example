@@ -126,6 +126,8 @@ DATA=$(jq --arg path "${VANITY_NAME}" \
    --arg force  "true" \
    '. | .["path"]=$path | .["force"]=$force' \
    <<<'{}')
+   
+echo "Trying: ${CONNECT_SERVER}__api__/v1/content/${CONTENT}/vanity"
 
 RESULT=$(curl --silent --show-error -L --max-redirs 0 --fail -X PUT \
     -H "Authorization: Key ${CONNECT_API_KEY}" \
