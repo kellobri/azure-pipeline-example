@@ -57,6 +57,7 @@ tar czf "${BUNDLE_PATH}" -C "${CONTENT_DIRECTORY}" .
 # Only "name" is required by the RStudio Connect API but we use "title" for
 # better presentation. We build a random name to avoid colliding with existing
 # content.
+NOW=$(date "+%Y-%m-%d %H:%M:%S")
 TITLE="$@"
 
 # Assign a random name. Avoid collisions so we always create something.
