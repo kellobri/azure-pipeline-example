@@ -20,6 +20,9 @@ steps:
   inputs:
     filePath: 'create-upload-deploy.sh'
     arguments: 'Content Title'
+  name: deploy
 - task: Bash@3
   inputs:
     filePath: 'update-vanity-url.sh'
+    arguments: $(deploy.CONTENT)
+  name: vanity
