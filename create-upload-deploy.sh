@@ -48,8 +48,6 @@ BUNDLE_PATH="bundle.tar.gz"
 # Remove any bundle from previous attempts.
 rm -f "${BUNDLE_PATH}"
 
-CONTENT_DIRECTORY="$1"
-
 # Create an archive with all of our Shiny application source and data.
 echo "Creating bundle archive: ${BUNDLE_PATH}"
 tar czf "${BUNDLE_PATH}" -C "${CONTENT_DIRECTORY}" .
@@ -57,7 +55,9 @@ tar czf "${BUNDLE_PATH}" -C "${CONTENT_DIRECTORY}" .
 # Only "name" is required by the RStudio Connect API but we use "title" for
 # better presentation. We build a random name to avoid colliding with existing
 # content.
-TITLE="$@"
+NOW=$(date "+%Y-%m-%d %H:%M:%S")
+BASE_TITLE="$@"
+TITLE="${BASE_TITLE} - ${NOW}"
 
 # Assign a random name. Avoid collisions so we always create something.
 # Inspired by http://tldp.org/LDP/abs/html/randomvar.html
@@ -90,6 +90,7 @@ DATA=$(jq --arg bundle_id "${BUNDLE}" \
    '. | .["bundle_id"]=$bundle_id' \
    <<<'{}')
 DEPLOY=$(curl --silent --show-error -L --max-redirs 0 --fail -X POST \
+              -b cookie.txt -c cookie.txt \
               -H "Authorization: Key ${CONNECT_API_KEY}" \
               --data "${DATA}" \
               "${CONNECT_SERVER}__api__/v1/content/${CONTENT}/deploy")
@@ -102,6 +103,7 @@ FIRST=0
 echo "Deployment task: ${TASK}"
 while [ "${FINISHED}" != "true" ] ; do
     DATA=$(curl --silent --show-error -L --max-redirs 0 --fail \
+              -b cookie.txt -c cookie.txt \
               -H "Authorization: Key ${CONNECT_API_KEY}" \
               "${CONNECT_SERVER}__api__/v1/tasks/${TASK}?wait=1&first=${FIRST}")
     # Extract parts of the task status.
