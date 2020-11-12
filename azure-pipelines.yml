@@ -12,9 +12,14 @@ pool:
 variables:
 - name: CONTENT_DIRECTORY
   value: app-directory
+- name: VANITY_NAME
+  value: azure-app-3000
 
 steps:
 - task: Bash@3
   inputs:
     filePath: 'create-upload-deploy.sh'
     arguments: 'Content Title'
+- task: Bash@3
+  inputs:
+    filePath: 'update-vanity-url.sh'
