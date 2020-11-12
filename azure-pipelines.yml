@@ -12,6 +12,8 @@ pool:
 variables:
 - name: CONTENT_DIRECTORY
   value: app-directory
+- name: NOW
+  value: $(date "+%Y-%m-%d %H:%M:%S")
 
 steps:
 - script: echo Hello, world!
