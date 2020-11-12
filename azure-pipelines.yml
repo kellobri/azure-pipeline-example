@@ -20,4 +20,4 @@ steps:
 - task: Bash@3
   inputs:
     filePath: 'create-upload-deploy.sh'
-    arguments: 'Content Title'
+    arguments: 'Content Title - ${NOW}'
